@@ -55,23 +55,23 @@ spec:
             {{- end }}
             {{- if (.Values.openid.oidSessionCheckSsi) }}
             - name: OID_SESSION_CHECK_SSI
-              value: {{ .Values.openid.oidSessionCheckSsi }}
+              value: {{ .Values.openid.oidSessionCheckSsi | quote}}
             {{- end }}
             {{- if (.Values.openid.oidSessionName) }}
             - name: OID_SESSION_NAME
-              value: {{ .Values.openid.oidSessionName }}
+              value: {{ .Values.openid.oidSessionName | quote}}
             {{- end }}
             {{- if (.Values.openid.oidRedirectPath) }}
             - name: OID_REDIRECT_PATH
-              value: {{ .Values.openid.oidRedirectPath }}
+              value: {{ .Values.openid.oidRedirectPath | quote}}
             {{- end }}
             {{- if (.Values.openid.oidDiscovery) }}
             - name: OID_DISCOVERY
-              value: {{ .Values.openid.oidDiscovery }}
+              value: {{ .Values.openid.oidDiscovery | quote}}
             {{- end }}
             {{- if (.Values.openid.oidClientId) }}
             - name: OID_CLIENT_ID
-              value: {{ .Values.openid.oidClientId }}
+              value: {{ .Values.openid.oidClientId | quote}}
             {{- end }}
             {{- if (.Values.openid.oidClientSecret) }}
             - name: OID_CLIENT_SECRET
@@ -82,27 +82,27 @@ spec:
             {{- end }}
             {{- if (.Values.openid.oidcAuthMethod) }}
             - name: OIDC_AUTH_METHOD
-              value: {{ .Values.openid.oidcAuthMethod }}
+              value: {{ .Values.openid.oidcAuthMethod | quote}}
             {{- end }}
             {{- if (.Values.openid.oidcRenewAccessTokenOnExpiry) }}
             - name: OIDC_RENEW_ACCESS_TOKEN_ON_EXPIRY
-              value: {{ .Values.openid.oidcRenewAccessTokenOnExpiry }}
+              value: {{ .Values.openid.oidcRenewAccessTokenOnExpiry | quote}}
             {{- end }}
             {{- if (.Values.openid.proxyHost) }}
             - name: PROXY_HOST
-              value: {{ .Values.openid.proxyHost }}
+              value: {{ .Values.openid.proxyHost | quote}}
             {{- end }}
             {{- if (.Values.openid.proxyPort) }}
             - name: PROXY_PORT
-              value: {{ .Values.openid.proxyPort }}
+              value: {{ .Values.openid.proxyPort | quote}}
             {{- end }}
             {{- if (.Values.openid.proxyProtocol) }}
             - name: PROXY_PROTOCOL
-              value: {{ .Values.openid.proxyProtocol }}
+              value: {{ .Values.openid.proxyProtocol | quote}}
             {{- end }}
             {{- if (.Values.openid.addHostHeader) }}
             - name: ADD_HOST_HEADER
-              value: {{ .Values.openid.addHostHeader }}
+              value: {{ .Values.openid.addHostHeader | quote}}
             {{- end }}
           image: "{{ .Values.openid.image.repository }}:{{ .Values.openid.image.tag }}"
           ports:
