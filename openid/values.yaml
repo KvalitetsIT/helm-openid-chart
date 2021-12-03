@@ -25,7 +25,7 @@ openid:
       memory: 64Mi
 
   provider: keycloak-oidc
-  upstream: "http://1270.0.0.1:8080"
+  upstream: "http://127.0.0.1:8080"
   reverseProxy: "true"
 
 deployment:

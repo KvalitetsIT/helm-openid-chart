@@ -47,7 +47,9 @@ spec:
         - name: {{ .Chart.Name }}
           args:
             - '--http-address=0.0.0.0:4180'
-            - '--insecure-oidc-allow-unverified-email'
+            - '--insecure-oidc-allow-unverified-email=true'
+            - '--pass-authorization-header=true'
+            - '--set-authorization-header=true'
           env:
             {{- if (.Values.openid.cookieSecret) }}
             - name: OAUTH2_PROXY_COOKIE_SECRET
