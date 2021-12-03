@@ -45,68 +45,51 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          args:
+            - '--http-address=0.0.0.0:4180'
+            - '--insecure-oidc-allow-unverified-email'
           env:
-            {{- if (.Values.openid.oidSessionSecret) }}
-            - name: OID_SESSION_SECRET
+            {{- if (.Values.openid.cookieSecret) }}
+            - name: OAUTH2_PROXY_COOKIE_SECRET
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.openid.oidSessionSecret.key }}
-                  name: {{ .Values.openid.oidSessionSecret.name }}
+                  key: {{ .Values.openid.cookieSecret.key }}
+                  name: {{ .Values.openid.cookieSecret.name }}
             {{- end }}
-            {{- if (.Values.openid.oidSessionCheckSsi) }}
-            - name: OID_SESSION_CHECK_SSI
-              value: {{ .Values.openid.oidSessionCheckSsi | quote}}
+            {{- if (.Values.openid.oidcIssuerUrl) }}
+            - name: OAUTH2_PROXY_OIDC_ISSUER_URL
+              value: {{ .Values.openid.oidcIssuerUrl | quote}}
             {{- end }}
-            {{- if (.Values.openid.oidSessionName) }}
-            - name: OID_SESSION_NAME
-              value: {{ .Values.openid.oidSessionName | quote}}
+            {{- if (.Values.openid.provider) }}
+            - name: OAUTH2_PROXY_PROVIDER
+              value: {{ .Values.openid.provider | quote}}
             {{- end }}
-            {{- if (.Values.openid.oidRedirectPath) }}
-            - name: OID_REDIRECT_PATH
-              value: {{ .Values.openid.oidRedirectPath | quote}}
+            {{- if (.Values.openid.ClientId) }}
+            - name: OAUTH2_PROXY_CLIENT_ID
+              value: {{ .Values.openid.ClientId | quote}}
             {{- end }}
-            {{- if (.Values.openid.oidDiscovery) }}
-            - name: OID_DISCOVERY
-              value: {{ .Values.openid.oidDiscovery | quote}}
-            {{- end }}
-            {{- if (.Values.openid.oidClientId) }}
-            - name: OID_CLIENT_ID
-              value: {{ .Values.openid.oidClientId | quote}}
-            {{- end }}
-            {{- if (.Values.openid.oidClientSecret) }}
-            - name: OID_CLIENT_SECRET
+            {{- if (.Values.openid.ClientSecret) }}
+            - name: OAUTH2_PROXY_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.openid.oidClientSecret.key }}
-                  name: {{ .Values.openid.oidClientSecret.name }}
+                  key: {{ .Values.openid.ClientSecret.key }}
+                  name: {{ .Values.openid.ClientSecret.name }}
             {{- end }}
-            {{- if (.Values.openid.oidcAuthMethod) }}
-            - name: OIDC_AUTH_METHOD
-              value: {{ .Values.openid.oidcAuthMethod | quote}}
+            {{- if (.Values.openid.emailDomains) }}
+            - name: OAUTH2_PROXY_EMAIL_DOMAINS
+              value: {{ .Values.openid.emailDomains | quote}}
             {{- end }}
-            {{- if (.Values.openid.oidcRenewAccessTokenOnExpiry) }}
-            - name: OIDC_RENEW_ACCESS_TOKEN_ON_EXPIRY
-              value: {{ .Values.openid.oidcRenewAccessTokenOnExpiry | quote}}
+            {{- if (.Values.openid.upstream) }}
+            - name: OAUTH2_PROXY_UPSTREAM
+              value: {{ .Values.openid.upstream | quote}}
             {{- end }}
-            {{- if (.Values.openid.proxyHost) }}
-            - name: PROXY_HOST
-              value: {{ .Values.openid.proxyHost | quote}}
-            {{- end }}
-            {{- if (.Values.openid.proxyPort) }}
-            - name: PROXY_PORT
-              value: {{ .Values.openid.proxyPort | quote}}
-            {{- end }}
-            {{- if (.Values.openid.proxyProtocol) }}
-            - name: PROXY_PROTOCOL
-              value: {{ .Values.openid.proxyProtocol | quote}}
-            {{- end }}
-            {{- if (.Values.openid.addHostHeader) }}
-            - name: ADD_HOST_HEADER
-              value: {{ .Values.openid.addHostHeader | quote}}
+            {{- if (.Values.openid.reverseProxy) }}
+            - name: OAUTH2_PROXY_REVERSE_PROXY
+              value: {{ .Values.openid.reverseProxy | quote}}
             {{- end }}
           image: "{{ .Values.openid.image.repository }}:{{ .Values.openid.image.tag }}"
           ports:
-            - containerPort: 80
+            - containerPort: 4180
               name: proxy-port
           resources:
             {{- toYaml .Values.openid.resources | nindent 12 }}
