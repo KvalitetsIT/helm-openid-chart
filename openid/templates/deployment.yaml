@@ -64,16 +64,16 @@ spec:
             - name: OAUTH2_PROXY_PROVIDER
               value: {{ .Values.openid.provider | quote}}
             {{- end }}
-            {{- if (.Values.openid.ClientId) }}
+            {{- if (.Values.openid.clientId) }}
             - name: OAUTH2_PROXY_CLIENT_ID
-              value: {{ .Values.openid.ClientId | quote}}
+              value: {{ .Values.openid.clientId | quote}}
             {{- end }}
-            {{- if (.Values.openid.ClientSecret) }}
+            {{- if (.Values.openid.clientSecret) }}
             - name: OAUTH2_PROXY_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  key: {{ .Values.openid.ClientSecret.key }}
-                  name: {{ .Values.openid.ClientSecret.name }}
+                  key: {{ .Values.openid.clientSecret.key }}
+                  name: {{ .Values.openid.clientSecret.name }}
             {{- end }}
             {{- if (.Values.openid.emailDomains) }}
             - name: OAUTH2_PROXY_EMAIL_DOMAINS
