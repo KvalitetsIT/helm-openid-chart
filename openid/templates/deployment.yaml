@@ -51,6 +51,7 @@ spec:
             - '--pass-authorization-header=true'
             - '--set-authorization-header=true'
             {{- if (.Values.openid.redirectUrl) }}
+            - '--redirect-url={{ .Values.openid.redirectUrl }}'
             {{- end }}
             {{- if (.Values.openid.upstream) }}
             - '--upstream={{ .Values.openid.upstream }}'
