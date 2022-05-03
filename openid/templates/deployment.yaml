@@ -50,6 +50,9 @@ spec:
             - '--insecure-oidc-allow-unverified-email=true'
             - '--pass-authorization-header=true'
             - '--set-authorization-header=true'
+            {{- if (.Values.openid.redirect-url) }}
+            - '--redirect-url={{ .Values.openid.redirect-url }}'
+            {{- end }}
             {{- if (.Values.openid.upstream) }}
             - '--upstream={{ .Values.openid.upstream }}'
             {{- end }}
