@@ -52,7 +52,6 @@ Parameter | Description                                                         
 `openid.ClientSecret.name` | Name of the SecretKeyRef                                                                                                                                                                                                                                   | 
 `openid.emailDomains` | Allowed email domains                                                                                                                                                                                                                                      | `client_secret_basic` or `client_secret_post`
 `openid.upstream` | Upstream address                                                                                                                                                                                                                                           | `true` or `false`
-`openid.skipProviderButton` | Skip sign-in-page to directly reach the next step: oauth/start Upstream address  | `true` or `false`
 `openid.image.repository` |
 `openid.image.tag` | 
 &nbsp; |
