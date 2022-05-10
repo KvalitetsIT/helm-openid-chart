@@ -59,6 +59,9 @@ spec:
             {{- if (.Values.openid.skipProviderButton) }}
             - '--skip-provider-button=true'
             {{- end }}
+            {{- if (.Values.openid.proxyPrefix) }}
+            - '--proxy-prefix={{ .Values.openid.proxyPrefix }}'
+            {{- end }}
           env:
             {{- if (.Values.openid.cookieSecret) }}
             - name: OAUTH2_PROXY_COOKIE_SECRET
