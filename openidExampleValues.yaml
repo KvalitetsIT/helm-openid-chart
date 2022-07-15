@@ -11,6 +11,14 @@ openid:
   proxyPort: 8080
   proxyProtocol: http
   addHostHeader: true
+  extraArgs:
+    - '--set-xauthrequest'
+    - '--pass-access-token'
+    - '--cookie-expire=30m'
+    - '--cookie-refresh=4m'
+    - '--errors-to-info-log'
+    - '--session-store-type=cookie'
+    - '--code-challenge-method=S256'
 
 
 image:

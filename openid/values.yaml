@@ -14,7 +14,7 @@ image:
 openid:
   image:
     repository: quay.io/oauth2-proxy/oauth2-proxy
-    tag: "v7.2.1"
+    tag: "v7.3.0"
 
   resources:
     limits:
@@ -109,7 +109,7 @@ tolerations: [ ]
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
 ## Allowed values: soft, hard
 ##
-podAffinityPreset: ""
+podAffinityPreset: "soft"
 
 ## @param operator.podAntiAffinityPreset Pod anti-affinity preset.
 ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity

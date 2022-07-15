@@ -52,6 +52,7 @@ Parameter | Description                                                         
 `openid.ClientSecret.name` | Name of the SecretKeyRef                                                                                                                                                                                                                                   | 
 `openid.emailDomains` | Allowed email domains                                                                                                                                                                                                                                      | `client_secret_basic` or `client_secret_post`
 `openid.upstream` | Upstream address                                                                                                                                                                                                                                           | `true` or `false`
+`openid.extraArgs` | Args for openid https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview#command-line-options | `- '--set-xauthrequest'` 
 `openid.image.repository` |
 `openid.image.tag` | 
 &nbsp; |
