@@ -50,6 +50,7 @@ spec:
             - '--insecure-oidc-allow-unverified-email=true'
             - '--pass-authorization-header=true'
             - '--set-authorization-header=true'
+            - '--session-store-type={{.Values.openid.sessionStorage.type}}'
             {{- if (.Values.openid.redirectUrl) }}
             - '--redirect-url={{ .Values.openid.redirectUrl }}'
             {{- end }}
@@ -61,9 +62,6 @@ spec:
             {{- end }}
             {{- if (.Values.openid.proxyPrefix) }}
             - '--proxy-prefix={{ .Values.openid.proxyPrefix }}'
-            {{- end }}
-            {{- if eq .Values.openid.sessionStorage.type "redis" }}
-            - '--session-store-type=redis'
             {{- end }}
             {{- if eq (default "" .Values.openid.sessionStorage.redis.clientType) "sentinel" }}
             - '--redis-use-sentinel=true'

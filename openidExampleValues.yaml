@@ -17,7 +17,6 @@ openid:
     - '--cookie-expire=30m'
     - '--cookie-refresh=4m'
     - '--errors-to-info-log'
-    - '--session-store-type=cookie'
     - '--code-challenge-method=S256'
   sessionStorage:
     type: redis
