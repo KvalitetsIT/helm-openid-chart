@@ -62,6 +62,14 @@ spec:
             {{- if (.Values.openid.proxyPrefix) }}
             - '--proxy-prefix={{ .Values.openid.proxyPrefix }}'
             {{- end }}
+            {{- if eq .Values.openid.sessionStorage.type "redis" }}
+            - '--session-store-type=redis'
+            {{- end }}
+            {{- if eq (default "" .Values.openid.sessionStorage.redis.clientType) "sentinel" }}
+            - '--redis-use-sentinel=true'
+            - '--redis-sentinel-master-name={{ .Values.openid.sessionStorage.redis.sentinel.masterName }}'
+            - '--redis-sentinel-connection-urls={{ .Values.openid.sessionStorage.redis.sentinel.connectionUrls }}'
+            {{- end }}
             {{- range .Values.openid.extraArgs }}
             - '{{ . }}'
             {{- end }}
@@ -99,6 +107,24 @@ spec:
             {{- if (.Values.openid.reverseProxy) }}
             - name: OAUTH2_PROXY_REVERSE_PROXY
               value: {{ .Values.openid.reverseProxy | quote}}
+            {{- end }}
+            {{- if eq (default "cookie" .Values.openid.sessionStorage.type) "redis" }}
+            {{- if .Values.openid.sessionStorage.redis.existingSecret }}
+            - name: OAUTH2_PROXY_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  {{- if .Values.openid.sessionStorage.redis.existingSecret }}
+                  name: {{ .Values.openid.sessionStorage.redis.existingSecret }}
+                  {{- end }}
+                  key: redis-password
+            {{- end }}
+            {{- if .Values.openid.sessionStorage.redis.sentinel.password }}
+            - name: OAUTH2_PROXY_REDIS_SENTINEL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.openid.sessionStorage.redis.existingSecret }}
+                  key: redis-password
+            {{- end }}
             {{- end }}
           image: "{{ .Values.openid.image.repository }}:{{ .Values.openid.image.tag }}"
           ports:

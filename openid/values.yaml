@@ -27,7 +27,24 @@ openid:
   provider: keycloak-oidc
   upstream: "http://127.0.0.1:8080"
   reverseProxy: "true"
-
+  # Configure the session storage type, between cookie and redis
+  sessionStorage:
+    # Can be one of the supported session storage cookie/redis
+    type: cookie
+    redis:
+      # Secret name that holds the redis-password and redis-sentinel-password values
+      existingSecret: ""
+      password: ""
+      # Can be one of sentinel/cluster/standalone
+      clientType: "standalone"
+      standalone:
+        # If empty and sessionStorage type is redis, will automatically be generated.
+        connectionUrl: ""
+      sentinel:
+        password: ""
+        masterName: ""
+        # connectionUrls: "redis://127.0.0.1:8000,redis://127.0.0.1:8000"
+        connectionUrls: [ ]
 deployment:
   enabled: true
   containerPort: 8080

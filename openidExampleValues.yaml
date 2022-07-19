@@ -19,6 +19,16 @@ openid:
     - '--errors-to-info-log'
     - '--session-store-type=cookie'
     - '--code-challenge-method=S256'
+  sessionStorage:
+    type: redis
+    redis:
+      existingSecret: "redis-password"
+      clientType: "sentinel"
+      sentinel:
+        masterName: "mymaster"
+        password: true
+        # connectionUrls: "redis://127.0.0.1:8000,redis://127.0.0.1:8000"
+        connectionUrls: "redis://redis-node-0.redis-headless:26379,redis://redis-node-1.redis-headless:26379,redis://redis-node-2.redis-headless:26379"
 
 
 image:
