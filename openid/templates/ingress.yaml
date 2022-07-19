@@ -10,8 +10,10 @@ metadata:
     {{- include "service.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
+    {{- if eq $.Values.openid.sessionStorage.type "cookie" }}
     nginx.ingress.kubernetes.io/proxy-buffer-size: 16k
     nginx.ingress.kubernetes.io/proxy-buffers-number: '8'
+    {{- end }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
