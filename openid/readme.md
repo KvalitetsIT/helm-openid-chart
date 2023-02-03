@@ -10,6 +10,7 @@ First add KvalitetsIT Helm repo to Helm
 $ helm repo add KvalitetsIT https://raw.githubusercontent.com/KvalitetsIT/helm-repo/master/
 $ helm repo update
 ```
+CokkieSecret generate: https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview
 
 Create values.yaml file with the parameters specified  
 
