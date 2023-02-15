@@ -18,6 +18,7 @@ openid:
     - '--cookie-refresh=4m'
     - '--errors-to-info-log'
     - '--code-challenge-method=S256'
+    - '--set-authorization-header=true'
   sessionStorage:
     type: redis
     redis:

@@ -61,7 +61,6 @@ spec:
             - '--http-address=0.0.0.0:4180'
             - '--insecure-oidc-allow-unverified-email=true'
             - '--pass-authorization-header=true'
-            - '--set-authorization-header=true'
             - '--session-store-type={{.Values.openid.sessionStorage.type}}'
             {{- if (.Values.openid.redirectUrl) }}
             - '--redirect-url={{ .Values.openid.redirectUrl }}'
