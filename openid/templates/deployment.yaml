@@ -142,7 +142,7 @@ spec:
           resources:
             {{- toYaml .Values.openid.resources | nindent 12 }}
 
-      {{- if .Values.sidecar }}
+      {{- if .Values.sidecar.enabled }}
         - name: {{ .Values.sidecar.name }}
           image: "{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
