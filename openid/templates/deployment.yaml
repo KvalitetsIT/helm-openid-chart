@@ -277,9 +277,9 @@ spec:
               containerPort: {{ $port }}
             {{- end }}
 
-                {{- if or (.Values.deployment.configMapMountPaths) (.Values.deployment.extraVolumeMounts) }}
           volumeMounts:
-          {{- end }}
+            - mountPath: /tmp
+              name: tmp
           {{- range $key, $value := .Values.deployment.configMapMountPaths }}
             - mountPath: {{ $value.configMapMountPath }}
               name: configmap
@@ -361,6 +361,8 @@ spec:
       {{- end }}
 
       volumes:
+        - name: tmp
+          emptyDir: {}
         - configMap:
             name: {{ include "service.fullname" . }}-config
           name: configmap
