@@ -11,6 +11,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+serviceMonitor:
+  enabled: false
+
 openid:
   image:
     repository: quay.io/oauth2-proxy/oauth2-proxy
