@@ -91,14 +91,14 @@ docNetpol:
 
 netpol:
   enabled: true
-  ingress:
-    ingress-openid:
-      namespaceSelector:
-        kubernetes.io/metadata.name: kube-system
-      podSelector:
-        app.kubernetes.io/instance: rke2-ingress-nginx
-      ports:
-        4180: TCP
+#  ingress:
+#    ingress-openid:
+#      namespaceSelector:
+#        kubernetes.io/metadata.name: kube-system
+#      podSelector:
+#        app.kubernetes.io/instance: rke2-ingress-nginx
+#      ports:
+#        4180: TCP
 
 #  ingress:
 #    name1:
