@@ -19,6 +19,13 @@ openid:
     repository: quay.io/oauth2-proxy/oauth2-proxy
     tag: "v7.6.0"
 
+  extraVolumes:
+    # myEmptyDir: |
+    #   emtpyDir: {}
+  extraVolumeMounts: 
+    # myEmptyDir:
+    #   mountPath: /dir
+
   resources:
     limits:
       cpu: 100m
