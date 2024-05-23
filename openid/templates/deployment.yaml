@@ -141,6 +141,22 @@ spec:
               name: proxy-port
           resources:
             {{- toYaml .Values.openid.resources | nindent 12 }}
+          volumeMounts: 
+            - mountPath: /tmp
+              name: tmp
+          {{- range $key, $value := .Values.openid.extraVolumeMounts }}
+            - mountPath: {{ $value.mountPath }}
+              {{- /* # Remove "_<number>" at end of string */}}
+              {{- $underScoreSuffix := regexFind "_\\d+$" $key }}
+              {{- $newLength := int (sub (len $key) (len $underScoreSuffix)) }}
+              name: {{ substr 0 $newLength $key }}
+              {{- if ($value.subPath) }}
+              subPath: {{ $value.subPath }}
+              {{- end }}
+              {{- if ($value.readOnly) }}
+              readOnly: {{ $value.readOnly }}
+              {{- end }}
+          {{- end }}
 
       {{- if .Values.sidecar.enabled }}
         - name: {{ .Values.sidecar.name }}
@@ -370,6 +386,10 @@ spec:
         - name: {{$key}}
           {{- tpl . $ | nindent 10 -}}
         {{- end }}
+        {{- range $key, $value := .Values.openid.extraVolumes }}
+        - name: {{$key}}
+          {{- tpl . $ | nindent 10 -}}
+        {{- end }}        
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
